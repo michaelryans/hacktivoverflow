@@ -11,7 +11,7 @@ const email_obj = {
     html: '<p>halooo ini tes yang sesungguhnya dengan kue</p>'
   }
 
-queue.process('email', function(job, done){
+queue.process('email-register', function(job, done){
     email_obj.to = job.data.to
     transporter.sendMail(email_obj, function(error, info) {
         if(error) {
@@ -20,7 +20,7 @@ queue.process('email', function(job, done){
             done ()
         }
     })
-  });
+});
   
 
 class UserController {
