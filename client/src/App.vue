@@ -2,18 +2,19 @@
   <div id="app">
     
     <!-- navbar -->
-    <b-container>
-      <Navbar />
+    <b-container fluid id="nav-wrapper">
+      <b-container>
+        <Navbar />
+      </b-container>
+
     </b-container>
 
     <b-container id="main-div">
-      <b-row>
+      <b-row >
         <b-col cols="2" id="main-navigation">
         <ul id="ul-navigation"> 
-          <li id="nav-title"> <i class="fab fa-stack-exchange"></i>&nbsp Navigation</li>
-          <router-link to="/"><li>Home</li></router-link>
-          <router-link to="/about"><li>About</li></router-link>
-          <router-link to="/question"><li>Question</li></router-link>
+          <li id="nav-title"> <i class="fab fa-stack-exchange"></i>&nbsp; Navigation</li>
+          <router-link to="/question"><li>Home</li></router-link>
           <router-link to="/ask"><li>Ask a question</li></router-link>
         </ul>
       </b-col>
@@ -54,6 +55,10 @@ export default {
 }
 #nav {
   padding: 30px;
+}
+
+#nav-wrapper {
+  background-color: #17A2B8;
 }
 
 #nav a {

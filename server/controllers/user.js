@@ -5,21 +5,24 @@ const transporter = require('../helpers/nodemailer')
 const kue = require('kue')
 const queue = kue.createQueue();
 
-const email_obj = {
-    from: 'michaelrs.mailer@gmail.com',
-    subject: "welcome",
-    html: '<p>halooo ini tes yang sesungguhnya dengan kue</p>'
-  }
 
 queue.process('email-register', function(job, done){
-    email_obj.to = job.data.to
-    transporter.sendMail(email_obj, function(error, info) {
-        if(error) {
-            return console.log(error)
-        } else {
-            done ()
-        }
-    })
+    console.log(job.data)
+
+    const email_obj = {
+        from: 'michaelrs.mailer@gmail.com',
+        subject: "welcome",
+        html: `<p>Welcome to Hacktiv Overflow</p>
+Thank you for signing up ${job.data.name}!`
+    }
+        email_obj.to = job.data.to
+        transporter.sendMail(email_obj, function(error, info) {
+            if(error) {
+                return console.log(error)
+            } else {
+                done ()
+            }
+        })
 });
   
 
@@ -31,7 +34,7 @@ class UserController {
         .then(created => {
             res.status(201).json(created)
 
-            var job = queue.create('email-register', {to: created.email})
+            var job = queue.create('email-register', {name:created.name, to: created.email})
             .save( function(err){
                if( !err ) console.log( job.id );
             });
